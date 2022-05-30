@@ -90,7 +90,7 @@ export default {
         icon: "mdi-lock-outline",
       },
         {
-        href: "/",
+        href: "/ListaFrota",
         router: true,
         title: "Help",
         icon: "mdi-help-circle-outline",

@@ -5,6 +5,7 @@ import CadastroAluno from './components/Aluno/CadastroAluno';
 import ListaAluno from './components/Aluno/ListaAluno';
 import CadastroInstrutor from './components/Instrutor/CadastroInstrutor';
 import CadastroFrota from './components/Frota/CadastroFrota';
+import ListaFrota from './components/Frota/ListaFrota';
 import AlterarSenha from './components/Senha/AlterarSenha';
 import MyCalendario from './components/Agenda/MyCalendario';
 import MyHome from './components/MyHome';
@@ -35,6 +36,11 @@ const routes = [
         path: '/frota/novo',
         name: 'CadastroFrota',
         component: CadastroFrota
+    },
+    {
+        path: '/frota',
+        name: 'ListaFrota',
+        component: ListaFrota
     },
     {
         path: '/AlterarSenha',
