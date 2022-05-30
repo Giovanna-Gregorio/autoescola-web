@@ -10,6 +10,8 @@ import AlterarSenha from './components/Senha/AlterarSenha';
 import MyCalendario from './components/Agenda/MyCalendario';
 import MyHome from './components/MyHome';
 import MyLogin from './components/MyLogin';
+import ListaLog from './components/Log/ListaLog';
+
 const routes = [
     {
         path: '/MyLogin',
@@ -56,8 +58,12 @@ const routes = [
         path: '/MyHome',
         name: 'MyHome',
         component: MyHome
-    }
-
+    },
+    {
+        path: 'logs',
+        name: 'ListaLog',
+        component: ListaLog
+    },
 ];
 
 const router = new VueRouter

@@ -95,6 +95,12 @@ export default {
         title: "Help",
         icon: "mdi-help-circle-outline",
       },
+      {
+        href: "/logs",
+        router: true,
+        title: "Log",
+        icon: "mdi-home",
+      },
     ],
   }),
 }
