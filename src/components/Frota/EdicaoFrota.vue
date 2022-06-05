@@ -83,8 +83,6 @@
   </v-container>
 </template>
 
-
-
 <script>
 import service from "./../../data-service"
 
@@ -145,7 +143,7 @@ export default {
       };
 
       service
-        .create("Frota", data)
+        .put(`Frota/${this.id}`, data)
         .then((response) => {
           console.log(response);
         })
@@ -159,4 +157,3 @@ export default {
   },
 };
 </script>
-
