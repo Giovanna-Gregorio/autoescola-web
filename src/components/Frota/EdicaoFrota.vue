@@ -104,9 +104,9 @@ export default {
     id: null
   }),
   created() {
-      this.id = this.$route.params.id;
-      this.getMarcas();
-      this.getFrota();
+    this.id = this.$route.params.id;
+    this.getMarcas();
+    this.getFrota();
   },
   methods: {
     getMarcas() {
@@ -135,7 +135,24 @@ export default {
                 console.log(e);
             })
     },
-    salvar() {},
+    salvar() {
+      var data = {
+        ano: this.ano,
+        modelo: this.modelo,
+        cor: this.cor,
+        observacao: this.observacao,
+        marcaId: this.selectMarca
+      };
+
+      service
+        .create("Frota", data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
     voltar() {
       this.$router.push({ name: "frotas" });
     },

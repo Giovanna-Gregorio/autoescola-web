@@ -83,9 +83,9 @@
   </v-container>
 </template>
 
-
-
 <script>
+import service from "./../../data-service"
+
 export default {
   name: "CadastroFrota",
   data: () => ({
@@ -105,7 +105,20 @@ export default {
 
     observacao: "",
   }),
+  created() {
+    this.getMarcas();
+  },
   methods: {
+    getMarcas() {
+      service
+        .getAll("Marca", this.id)
+        .then((response) => {
+          this.itemsMarca = response.data.data;
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    },
     salvar() {},
     voltar() {
       this.$router.push({ name: "frota" });
