@@ -18,14 +18,14 @@
     >
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editar(item.id)">mdi-pencil</v-icon>
-        <v-icon small @click="excluir(item.id)">mdi-delete</v-icon>
+        <v-icon small @click="abrirModal(item.id)">mdi-delete</v-icon>
       </template>
     </v-data-table>
 
     <v-dialog v-model="dialog" max-width="350">
       <v-card>
         <v-card-title class="text-h8 text-center">
-          Deseja realmente excluir o veículo selecionadao?
+          Deseja realmente excluir a frota selecionada?
         </v-card-title>
 
         <v-card-actions>
@@ -33,7 +33,7 @@
 
           <v-btn color="red darken-1" text @click="dialog = false"> Não </v-btn>
 
-          <v-btn color="green darken-1" text @click="dialog = false">
+          <v-btn color="green darken-1" text @click="excluir()">
             Sim
           </v-btn>
         </v-card-actions>
@@ -43,12 +43,14 @@
 </template>
 
 <script>
+import service from "./../../data-service"
+
 export default {
   name: "ListaFrota",
   data: () => ({
     headers: [
       { text: "Ano", value: "ano" },
-      { text: "Marca", value: "marca", sortable: false },
+      { text: "Marca", value: "marca.descricao", sortable: false },
       { text: "Modelo", value: "modelo", sortable: false },
       { text: "Cor", value: "cor", sortable: false },
       { text: "Observação", value: "observacao", sortable: false },
@@ -56,33 +58,46 @@ export default {
     ],
     frota: [],
     dialog: false,
+    idExcluir: null
   }),
   created() {
     this.getFrota();
   },
-  /*/methods: {
+  methods: {
     getFrota() {
       service
-        .getAll("frota")
+        .getAll("Frota")
         .then((response) => {
           this.frota = response.data.data;
         })
         .catch((e) => {
           console.log(e);
         });
-    },/*/
-    editar() {
-      //id
     },
-    excluir(id) {
+    editar(id) {
+      this.$router.push({ path: `/frota/editar/${id}`})
+    },
+   excluir() {
+      service
+        .delete("frota", this.idExcluir)
+        .then(() => {
+          this.dialog = false;
+          this.getFrota();
+          this.$router.go();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    abrirModal(id) {
       this.dialog = true;
-      console.log(id);
+      this.idExcluir = id;
     },
     novo() {
       this.$router.push({ name: "CadastroFrota" });
     },
   }
-
+}
 </script>
 
 

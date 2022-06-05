@@ -4,11 +4,11 @@
     <h3>Lista de Alunos</h3>
     <v-divider></v-divider>
     <br />
-    <v-btn depressed color="warning" @click="novo()"> Novo </v-btn>
+    <v-btn depressed color="#172257" @click="novo()"> Novo </v-btn>
     <br /><br />
     <v-data-table
       :headers="headers"
-      :items="alunos"
+      :items="aluno"
       :items-per-page="10"
       items-per-page-all-text="Itens por página"
       items-per-page-text="Itens por página"
@@ -40,30 +40,43 @@
   </v-container>
 </template>
 
-<!--
 <script>
-import service from "../../data-service";
+import service from "./../../data-service";
 
 export default {
   name: "ListaAluno",
   data: () => ({
     headers: [
-      { text: "Nome", value: "pessoa.nome" },
-      { text: "CPF", value: "pessoa.cpf", sortable: false },
-      { text: "Celular", value: "pessoa.celular", sortable: false },
+      { text: "Nome", value: "nome" },
+      { text: "CPF", value: "cpf" },
+      { text: "RG", value: "rg" },
+      { text: "Sexo", value: "sexo", sortable: false },
+      { text: "Nascimento", value: "nascimento" },
+      { text: "Email", value: "email" },
+      { text: "Celular", value: "email" },
+      { text: "Profissão", value: "profissao", sortable: false },
+      { text: "Nome da mãe", value: "nomemae" },
+      { text: "Nome do pai", value: "nomepai" },
+      { text: "CEP", value: "cep" },
+      { text: "Endereço", value: "endereco" },
+      { text: "Número", value: "numero" },
+      { text: "Bairro", value: "bairro" },
+      { text: "Cidade", value: "cidade" },
+      { text: "Estado", value: "estado", sortable: false },
+
       { text: "", value: "actions", sortable: false },
     ],
-    alunos: [],
+    aluno: [],
     dialog: false,
-    idExcluir: null
+    idExcluir: null,
   }),
   created() {
-    this.getAlunos();
+    this.getAluno();
   },
   methods: {
-    getAlunos() {
+    getAluno() {
       service
-        .getAll("aluno")
+        .getAll("Aluno")
         .then((response) => {
           this.alunos = response.data.data;
         })
@@ -74,21 +87,21 @@ export default {
     editar(id) {
       this.$router.push({ path: `/aluno/editar/${id}` });
     },
-    abrirModal(id) {
-      this.dialog = true;
-      this.idExcluir = id;
-    },
     excluir() {
       service
-        .delete("aluno", this.idExcluir)
+        .delete("alunos", this.idExcluir)
         .then(() => {
           this.dialog = false;
-          this.getAlunos();
+          this.getAluno();
           this.$router.go();
         })
         .catch((e) => {
           console.log(e);
         });
+    },
+    abrirModal(id) {
+      this.dialog = true;
+      this.idExcluir = id;
     },
     novo() {
       this.$router.push({ name: "CadastroAluno" });
@@ -96,4 +109,5 @@ export default {
   },
 };
 </script>
--->
+
+

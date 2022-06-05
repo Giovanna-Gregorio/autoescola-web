@@ -12,32 +12,56 @@
       loading="true"
       loading-text="Carregando..."
     >
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small @click="abrirModal(item.id)">mdi-delete</v-icon>
+      </template>
     </v-data-table>
+
+    <v-dialog v-model="dialog" max-width="350">
+      <v-card>
+        <v-card-title class="text-h8 text-center">
+          Log
+        </v-card-title>
+
+        <v-card-text>
+          {{ this.dados }}
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
-import service from "../../data-service";
+import service from "./../../data-service";
 
 export default {
   name: "ListaLog",
   data: () => ({
     headers: [
-      { text: "Tipo", value: "" },
-      { text: "Usuário", value: "", sortable: false },
-      { text: "Dados", value: "", sortable: false },
-      { text: "Status", value: "", sortable: false },
-      { text: "Data", value: "", sortable: false },
+      { text: "Tipo", value: "tipo" },
+      { text: "Usuário", value: "usuarioId", sortable: false },
+      { text: "Status", value: "status", sortable: false },
+      { text: "Data", value: "data", sortable: false },
+      { text: "", value: "actions", sortable: false },
     ],
-    logs: []
+    logs: [],
+    idDetalhe: null,
+    dialog: false,
+    dados: null
   }),
   created() {
     this.getLogs();
   },
   methods: {
+    abrirModal(id) {
+      this.dialog = true;
+      this.idDetalhe = id;
+
+      this.dados = this.logs.find(x => x.id == this.idDetalhe).dados;
+    },
     getLogs() {
       service
-        .getAll("log")
+        .getAll("Log")
         .then((response) => {
           this.logs = response.data.data;
         })

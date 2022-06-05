@@ -3,13 +3,21 @@ import VueRouter from 'vue-router'
 
 import CadastroAluno from './components/Aluno/CadastroAluno';
 import ListaAluno from './components/Aluno/ListaAluno';
+
 import CadastroInstrutor from './components/Instrutor/CadastroInstrutor';
+
 import CadastroFrota from './components/Frota/CadastroFrota';
 import ListaFrota from './components/Frota/ListaFrota';
+import EdicaoFrota from './components/Frota/EdicaoFrota';
+
 import AlterarSenha from './components/Senha/AlterarSenha';
+
 import MyCalendario from './components/Agenda/MyCalendario';
+
 import MyHome from './components/MyHome';
+
 import MyLogin from './components/MyLogin';
+
 import ListaLog from './components/Log/ListaLog';
 
 const routes = [
@@ -24,7 +32,7 @@ const routes = [
         component: CadastroAluno
     },
     {
-        path: 'alunos',
+        path: '/alunos',
         name: 'ListaAluno',
         component: ListaAluno
     },
@@ -40,8 +48,13 @@ const routes = [
         component: CadastroFrota
     },
     {
+        path: '/frota/editar/:id',
+        name: 'EdicaoFrota',
+        component: EdicaoFrota
+    },
+    {
         path: '/frota',
-        name: 'ListaFrota',
+        name: 'frotas',
         component: ListaFrota
     },
     {
@@ -60,7 +73,7 @@ const routes = [
         component: MyHome
     },
     {
-        path: 'logs',
+        path: '/logs',
         name: 'ListaLog',
         component: ListaLog
     },

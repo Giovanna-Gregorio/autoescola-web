@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import service from "../../data-service";
+//import service from "../../data-service";
 
 export default {
   name: "MyLogin",
@@ -61,14 +61,14 @@ export default {
     platformName: "Autoescola",
     senha: null,
     usuario: null,
-  }),
+  }),/*/
+
   methods: {
     login() {
       var data = {
         "email": this.nome,
         "senha": this.valor
       };
-
       service
         .post("login", data)
         .then((response) => {
@@ -84,6 +84,6 @@ export default {
     esqueciSenha() {
       this.$router.push({ name: "recuperarSenha" });
     },
-  },
+  },/*/
 };
 </script>
